@@ -1,1 +1,80 @@
 
+class Solution {
+    public int[][] mergeArrays(int[][] nums1, int[][] nums2) {
+
+ 
+
+        HashMap<Integer,Integer> map = new HashMap<>();
+
+ 
+
+        for(int i=0;i<nums1.length;i++){
+            map.put(nums1[i][0], nums1[i][1]);
+        }
+
+ 
+
+        for(int i=0;i<nums2.length;i++){
+            int num=0;
+            if(map.containsKey(nums2[i][0])){
+                num = map.get(nums2[i][0]) + nums2[i][1];
+            }
+
+ 
+
+            else{
+                num += nums2[i][1];
+            }
+
+ 
+
+            map.put(nums2[i][0], num);
+        }
+
+ 
+
+        int ans[] = new int[map.size()];
+        int x=0;
+        for(int i:map.keySet()){
+            ans[x] = i;
+            x++;
+        }
+
+ 
+
+        Arrays.sort(ans);
+
+ 
+
+        int ans2[][] = new int[map.size()][2];
+        for(int i=0;i<ans.length;i++){
+            ans2[i] = new int[]{ans[i],map.get(ans[i])};
+        }
+        
+        return ans2;
+    }
+}
+
+ 
+
+ 
+
+Unit test cases:
+1. Input: nums1 = [], nums2 = []
+Expected Output: []
+
+ 
+
+2. Input:
+nums1 = [[1, 3], [2, 5]],
+nums2 = []
+Expected Output: [[1, 3], [2, 5]]
+
+ 
+
+3. Input:
+nums1 = [[1, 3], [4, 5]],
+nums2 = [[2, 7], [3, 8]]
+Expected Output:
+[[1, 3], [2, 7], [3, 8], [4, 5]]
+
