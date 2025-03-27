@@ -1,0 +1,28 @@
+class Solution {
+    public int minOperations(int[][] grid, int x) {
+        List<Integer> list = new ArrayList<>();
+
+        for(int a[]:grid){
+            for(int n:a){
+                list.add(n);
+            }
+        }
+
+        Collections.sort(list);
+
+        int median = list.get(list.size()/2);
+        int operations = 0;
+
+        for(int num:list){
+            int diff = Math.abs(median-num);
+
+            if(diff%x !=0)
+             return -1;
+
+            operations += diff/x; 
+             
+        }
+
+        return operations;
+    }
+}
